@@ -61,6 +61,20 @@ function initMap() {
                 lat:40.808666 ,
                 lng: -73.944589
             }
+        } ,
+        {
+
+            title: "Microsoft Technology Center ",
+            location: {
+                lat:40.756674 ,
+                lng:-73.989900
+            }
+        } ,{
+            title: "La Casa del Mofongo",
+            location:{
+                lat:40.850363 ,
+                lng: -73.933332
+            }
         }
     ];
 
@@ -99,15 +113,15 @@ function initMap() {
                     Authorization:"Client-ID 1a7d8222a2209049809264d5565ed56e1d5f649ed37643fc42627ab799d2e03c"
                 }
             }).then( data => data.json()).then( response => {
-                console.log(response.results);
+                console.log(response.results[0].urls.thumb);
                 if(response.results.length > 0) {
-                    img =  response.results[0].urls.thumb;
+                    img =  response.results[1].urls.thumb;
 
 
                 }
                 infoWin.setContent(`<div>
                 <img src="${img}" >
-             ${marker.title} </div>`);
+             <h3>${marker.title}</h3> </div>`);
              infoWin.open(map, marker);
 
             });
@@ -116,7 +130,7 @@ function initMap() {
 
 
             infoWin.addListener('closeclick' , function(){
-                infoWin.setMarker(null);
+                infoWin.setMap(null);
             });
         }
     }

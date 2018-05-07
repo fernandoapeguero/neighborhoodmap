@@ -1,6 +1,6 @@
 // google map or the page
 let map;
-
+let markers = [];
 function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), {
@@ -26,10 +26,44 @@ function initMap() {
                 lat: 40.868745,
                 lng: -73.931965
             }
+        },
+         {
+           title: "central park",
+           location:{
+               lat:40.782471 ,
+               lng: -73.966578
+           }
+        } ,
+        {
+            title: "Orchard Beach",
+            location: {
+                lat:40.867144 ,
+                lng: -73.794647
+            }
+        } ,
+        {
+            title: "Micro Center",
+            location: {
+                lat:40.924946 ,
+                lng: -73.856999
+            }
+        }  ,
+        {
+            title: "Times Square",
+            location: {
+                lat:40.758791 ,
+                lng: -73.985143
+            }
+        } ,
+        {
+            title:"Sylvia's ",
+            location: {
+                lat:40.808666 ,
+                lng: -73.944589
+            }
         }
     ];
 
-    let markers = [];
     let informationWindow = new google.maps.InfoWindow();
     let bounds = new google.maps.LatLngBounds();
 
@@ -55,15 +89,31 @@ function initMap() {
 
     }
 
-
-
-
     function populationWindow(marker , infoWin){
-
+    let img ="";
         if(infoWin != marker){
             infoWin.marker = marker;
-            infoWin.setContent(`<div> ${marker.title} </div>`);
-            infoWin.open(map, marker);
+
+            fetch(`https://api.unsplash.com/search/photos/?page=1&query=${marker.title}`, {
+                headers:{
+                    Authorization:"Client-ID 1a7d8222a2209049809264d5565ed56e1d5f649ed37643fc42627ab799d2e03c"
+                }
+            }).then( data => data.json()).then( response => {
+                console.log(response.results);
+                if(response.results.length > 0) {
+                    img =  response.results[0].urls.thumb;
+
+
+                }
+                infoWin.setContent(`<div>
+                <img src="${img}" >
+             ${marker.title} </div>`);
+             infoWin.open(map, marker);
+
+            });
+
+            console.log(marker.title);
+
 
             infoWin.addListener('closeclick' , function(){
                 infoWin.setMarker(null);
@@ -72,3 +122,61 @@ function initMap() {
     }
 
 }
+//open  menu function
+const navigatorOpen = document.getElementById("navigation-open");
+const container =  document.getElementById("container");
+const closeButton = document.getElementById("close-sidemenu");
+
+
+navigatorOpen.addEventListener('click' , function(){
+
+       container.style.width = "350px"
+       populateList();
+
+})
+
+ closeButton.addEventListener('click' , function(){
+          container.style.width = "0"
+
+ })
+
+//list for the list view to get the  markes i have
+
+const searchField = document.getElementById("search-field");
+
+const filterButton = document.getElementById("filter-button");
+
+let listView = document.getElementById("listview");
+
+searchField.addEventListener("input" , function(){
+
+            listView.innerHTML = markers.map(data => {
+                return data.title.toLowerCase().includes(this.value.trim()) ? `<li>${data.title}</li>` : "";
+
+            });
+
+          if(this.value.length === 0 ){
+              listView.innerHTML = "";
+              markers.map(data => {
+                return data.setMap(map);
+            })
+            populateList();
+        }
+
+});
+
+filterButton.addEventListener('click', function(){
+
+    markers.map(data => {
+        return data.title.toLowerCase().includes(searchField.value) ? data.setMap(map)  : data.setMap(null);
+    });
+
+});
+
+function populateList(){
+
+        listView.innerHTML = markers.map(data => {
+             return `<li>${data.title}</li>`
+        });
+}
+

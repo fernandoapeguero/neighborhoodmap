@@ -7,27 +7,32 @@
     <title>Neighborhood Map</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
-
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+        <div id="side-menu">
+               <div id="container">
+                    <div class="top-bar">
+                            <h1>Neighborhood Map <span id="close-sidemenu">x</span></h1>
+                        </div>
+                        <div id="my-side-nav" class="side-nav">
+                            <input id="search-field" type="search" placeholder="Search" class="searcher"/>
+                            <input id="filter-button" type="button" value="Filter" class="filter-button">
+                        </div>
+                      <div id="listview">
+                            <ul>
+                                </ul>
+                      </div>
 
+               </div>
 
-        <div class="side-menu">
-            <div class="top-bar">
-                <h1>Neighborhood Map</h1>
-            </div>
-            <div id="my-side-nav" class="side-nav">
-                <input type="search" placeholder="Search" class="searcher"/>
-                <input type="button" value="Filter" class="filter-button">
+            <div class="nav-opener-holder"><span id="navigation-open" >&#9776; open</span> </div>
 
-            </div>
+             <div id="map"></div>
         </div>
-        <div id="map"> </div>
-
 
 
 </div>

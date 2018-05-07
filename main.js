@@ -56,7 +56,7 @@ function initMap() {
             }
         } ,
         {
-            title:"Sylvia's ",
+            title:"Sylvia's Restaurant of Harlem ",
             location: {
                 lat:40.808666 ,
                 lng: -73.944589
@@ -122,7 +122,7 @@ function initMap() {
             }).then( data => data.json()).then( response => {
                 console.log(response.results[0].urls.thumb);
                 if(response.results.length > 0) {
-                    img =  response.results[1].urls.thumb;
+                    img =  response.results[0].urls.thumb;
 
 
                 }

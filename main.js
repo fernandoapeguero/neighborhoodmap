@@ -75,6 +75,13 @@ function initMap() {
                 lat:40.850363 ,
                 lng: -73.933332
             }
+        } ,
+        {
+            title: "Spa Castle ",
+             location:{
+                 lat:40.787391 ,
+                 lng:-73.836811
+             }
         }
     ];
 
@@ -144,7 +151,7 @@ const closeButton = document.getElementById("close-sidemenu");
 
 navigatorOpen.addEventListener('click' , function(){
 
-       container.style.width = "350px"
+       container.style.width = "250px";
        populateList();
 
 })

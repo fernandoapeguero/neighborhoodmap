@@ -54,7 +54,7 @@ html , body {
 }
 
 #listview li {
-   color: white;
+   color:rgb(238, 238, 238);
    margin-left: 10px;
    margin-top: 10px;
    cursor: pointer;

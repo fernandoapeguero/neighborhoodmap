@@ -1,5 +1,9 @@
 # neighborhoodmap
 
+## Introduction 
+
+The neighborhood map app is created with react and google map where you can ping local places in your area have a group of ping marking favorite location or points of interest.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
